@@ -8,7 +8,7 @@ import com.denigunawan.tracking_number.models.TrackingNumber;
 import com.denigunawan.tracking_number.repositories.TrackingNumberRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,8 +19,8 @@ import java.time.Instant;
 @Slf4j
 public class GenerateTrackingNumberServices {
 
- @Autowired
- private RedisTemplate<String, String> redisTemplate;
+// @Autowired
+// private RedisTemplate<String, String> redisTemplate;
  @Autowired
  private TrackingNumberRepo insertTrackingNumberReport;
  @Autowired
@@ -48,12 +48,12 @@ public String generateTrackingNumber(TrackingNumberRequest trackingNumberRequest
         String customerSlug = trackingNumberRequest.getCustomerSlug();
 
         String cacheKey = String.join(":", origin, destination, weight.toPlainString(), createdAt, customerId, customerName, customerSlug);
-        String cached = redisTemplate.opsForValue().get(cacheKey);
-
-        if (cached != null) {
-            log.info("Tracking number found in cache for key: {}", cacheKey);
-            return cached;
-        }
+//        String cached = redisTemplate.opsForValue().get(cacheKey);
+//
+//        if (cached != null) {
+//            log.info("Tracking number found in cache for key: {}", cacheKey);
+//            return cached;
+//        }
 
         String prefix = (origin + destination).toUpperCase();
         String rawData = weight.toPlainString() +
@@ -69,7 +69,7 @@ public String generateTrackingNumber(TrackingNumberRequest trackingNumberRequest
         log.info("Request DTO: {}", trackingNumberRequest);
         TrackingNumber history = trackingNumberMapper.toEntity(trackingNumberRequest);
 
-        redisTemplate.opsForValue().set(cacheKey, trackingNumber, Duration.ofHours(1));
+//        redisTemplate.opsForValue().set(cacheKey, trackingNumber, Duration.ofHours(1));
         log.info("History: {}", history);
         insertTrackingNumberReport.save(history);
         log.info("Generated new tracking number: {}", trackingNumber);
