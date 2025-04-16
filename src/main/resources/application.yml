@@ -8,7 +8,7 @@ spring:
 #    password: admin
 
     # for cloud
-    url: jdbc:mysql://sql12.freesqldatabase.com:3306/sql12773474
+    url: jdbc:mysql://sql12.freesqldatabase.com:3306/sql12773474?useSSL=false&allowPublicKeyRetrieval=true&disableDnsCaching=true&autoReconnect=true
     username: sql12773474
     password: gEXXFMnNAH
     driver-class-name: com.mysql.cj.jdbc.Driver
