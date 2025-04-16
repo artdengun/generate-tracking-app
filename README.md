@@ -147,8 +147,6 @@ To view API documentation:
 http://localhost:8080/swagger-ui.html
 ```
 
-> Make sure `springdoc-openapi` is added in your dependencies.
-
 ---
 
 ## Development Notes
